@@ -3,6 +3,7 @@ package com.jb.erp.repository;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.jb.erp.model.User;
@@ -11,6 +12,7 @@ public class UsersSearch implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Inject
 	private EntityManager manager;
 
 	public UsersSearch() {
