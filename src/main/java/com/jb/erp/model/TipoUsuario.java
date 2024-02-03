@@ -2,10 +2,10 @@ package com.jb.erp.model;
 
 public enum TipoUsuario {
 	
-	PADRAO("Usuario basico"),
-	PREMIUM("Usuario Premium"),
-	ADM("Usuario Administrador"),
-	SU("Super Usuario");
+	B("Usuario basico"),
+	P("Usuario Premium"),
+	A("Usuario Administrador"),
+	S("Super Usuario");
 	
 	private String descricao;
 
