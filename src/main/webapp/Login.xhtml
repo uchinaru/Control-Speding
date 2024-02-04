@@ -7,24 +7,22 @@
 	template="WEB-INF/template/LayoutLogin.xhtml">
 	
 	<ui:define name="title-aba-navegador">
-		Control Speding - Gestão de gastos
+		Painel - Control Speding
 	</ui:define>	
 
 	<ui:define name="conteudo">
 		<div class="page">
 			<h:form class="formLogin">
 			<p:messages id="messages"/>
-				<h1>Painel Control Speding</h1>
+				<h1>Login</h1>
 				<p>Digite os seus dados de acesso nos campos abaixo.</p>
-				<h:panelGrid columns="2" id="camposGrid">
-					<p:outputLabel  value="Login:" for="loginInput"/>
-					<p:inputText id="loginInput" value="#{loginForm.login}"/>
-					
-					<p:outputLabel value="Senha:" for="senhaInput"/>
-					<p:password id="senhaInput" value="#{loginForm.senha}"/>
+				<h:panelGrid columns="1" id="camposGrid">
+					<p:inputText id="loginInput" value="#{loginForm.login}" placeholder="Digite o login"/>
+					<p:password id="senhaInput" value="#{loginForm.senha}" placeholder="Digite a senha"/>
 		
 					<p:commandButton value="Logar" class="btn" actionListener="#{loginForm.logar}" ajax="false" update="messages camposGrid"/>
 					<p:commandButton value="Cadastrar" class="btn"/>
+					<a href="/">recuperar senha</a>
 				</h:panelGrid>
 			</h:form>
 		</div>

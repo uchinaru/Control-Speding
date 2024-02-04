@@ -39,7 +39,7 @@ body {
     display: inline-block;
     font-size: 14px;
     color: #666;
-    margin-bottom: 25px;
+    margin-bottom: 8px;
 }
 
 .formLogin input {
@@ -51,6 +51,7 @@ body {
     border-radius: 4px;
     transition: all linear 160ms;
     outline: none;
+    width: 100%;
 }
 
 .formLogin label {
@@ -67,4 +68,5 @@ body {
     transition: all linear 160ms;
     cursor: pointer;
     margin: 0 !important;
+    width: 100%;
 }
