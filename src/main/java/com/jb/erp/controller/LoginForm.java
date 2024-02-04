@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import com.jb.erp.model.User;
 import com.jb.erp.repository.UsersSearch;
+import com.jb.erp.util.encryptUtils;
 
 @Named
 @ViewScoped
@@ -24,7 +25,8 @@ public class LoginForm implements Serializable {
 	private String senha ="";
 	
 	public void logar() {
-		 usuario = userSearch.findUser(login, senha);
+		
+		 usuario = userSearch.findUser(login, encryptUtils.encryptPasswordMD5(senha));
 		
 		 if (usuario != null) {
 			 System.out.println("LOGOU !");
