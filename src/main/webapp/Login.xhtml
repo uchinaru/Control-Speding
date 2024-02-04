@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="WEB-INF/template/LayoutLogin.xhtml">
+	
+	<ui:define name="title-aba-navegador">
+		Control Speding - Gestão de gastos
+	</ui:define>	
+
+	<ui:define name="conteudo">
+		<div class="page">
+			<h:form class="formLogin">
+			<p:messages id="messages"/>
+				<h1>Painel Control Speding</h1>
+				<p>Digite os seus dados de acesso nos campos abaixo.</p>
+				<h:panelGrid columns="2" id="camposGrid">
+					<p:outputLabel  value="Login:" for="loginInput"/>
+					<p:inputText id="loginInput" value="#{loginForm.login}"/>
+					
+					<p:outputLabel value="Senha:" for="senhaInput"/>
+					<p:password id="senhaInput" value="#{loginForm.senha}"/>
+		
+					<p:commandButton value="Logar" class="btn" actionListener="#{loginForm.logar}" ajax="false" update="messages camposGrid"/>
+					<p:commandButton value="Cadastrar" class="btn"/>
+				</h:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>

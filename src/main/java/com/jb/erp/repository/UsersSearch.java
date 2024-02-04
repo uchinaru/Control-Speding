@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import com.jb.erp.model.User;
 
@@ -28,6 +30,18 @@ public class UsersSearch implements Serializable{
 
 	public List<User> allUsers() {
 		return manager.createQuery("from User", User.class).getResultList();
+	}
+	
+	public User findUser(String login, String senha) {
+		   try {
+		        Query query = manager.createQuery("from User where login = :login and senha = :senha");
+		        query.setParameter("login", login);
+		        query.setParameter("senha", senha);
+
+		        return (User) query.getSingleResult();
+		    } catch (NoResultException e) {
+		        return null;
+		    }
 	}
 		
 	public void Save(User user) {

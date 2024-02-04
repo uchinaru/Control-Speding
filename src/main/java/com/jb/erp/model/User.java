@@ -37,7 +37,7 @@ public class User implements Serializable {
 
 	@NotBlank
 	@Size(min = 5)
-	@Column(length = 30, nullable = false)
+	@Column(length = 30, nullable = false, unique = true)
 	private String login;
 
 	@NotBlank
@@ -47,7 +47,7 @@ public class User implements Serializable {
 
 	@Email
 	@NotBlank
-	@Column(length = 100, nullable = false)
+	@Column(length = 100, nullable = false, unique = true)
 	private String email;
 
 	@NotBlank
