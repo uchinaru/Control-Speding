@@ -14,7 +14,7 @@ public class EntityManagerProducer {
 	private EntityManagerFactory factory;
 
 	public EntityManagerProducer() {
-		this.factory = Persistence.createEntityManagerFactory("ControlSpeding");
+		this.factory = Persistence.createEntityManagerFactory("ControlSpending");
 	}
 	
 	@Produces

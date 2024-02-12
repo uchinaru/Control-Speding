@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import com.jb.erp.model.User;
 import com.jb.erp.repository.UsersSearch;
+import com.jb.erp.util.ServiceUtils;
 import com.jb.erp.util.encryptUtils;
 
 @Named
@@ -18,7 +19,7 @@ public class LoginForm implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private UsersSearch userSearch;
+	private ServiceUtils serviceUtils;
 	
 	private User usuario;
 	private String login ="";
@@ -26,7 +27,7 @@ public class LoginForm implements Serializable {
 	
 	public void logar() {
 		
-		 usuario = userSearch.findUser(login, encryptUtils.encryptPasswordMD5(senha));
+		 usuario = serviceUtils.findLoginUser(login, senha);
 		
 		 if (usuario != null) {
 			 System.out.println("LOGOU !");
@@ -35,7 +36,11 @@ public class LoginForm implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario não encontrado!","Erro no Login!"));
 		}
 	}
-
+	
+	public String cadastrar() {
+		return "CadastroDeUsuario";
+	}
+	
 	public String getLogin() {
 		return login;
 	}

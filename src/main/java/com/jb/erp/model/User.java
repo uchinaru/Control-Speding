@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -30,33 +32,33 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	@NotNull
 	@Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$", message = "O nome deve conter apenas letras e espaços")
 	@Column(length = 100, nullable = false)
 	private String nome;
 
-	@NotBlank
+	@NotNull
 	@Size(min = 5)
 	@Column(length = 30, nullable = false, unique = true)
 	private String login;
 
-	@NotBlank
+	@NotNull
 	@Size(min = 5)
 	@Column(length = 30, nullable = false)
 	private String senha;
 
 	@Email
-	@NotBlank
+	@NotNull
 	@Column(length = 100, nullable = false, unique = true)
 	private String email;
 
-	@NotBlank
-	@PastOrPresent
+	@NotNull
+	@Past
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_aniversario", nullable = false)
 	private Date dataAniversario;
 
-	@NotBlank
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoUsuario;
 

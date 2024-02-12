@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://jakarta.ee/xml/ns/jakartaee" 
+         version="3.1" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd"> 
+
+	<application>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+			<supported-locale>pt_BR</supported-locale>
+		</locale-config>
+		
+	</application>
+	
+	<navigation-rule>
+	    <from-view-id>/Login.xhtml</from-view-id>
+	    <navigation-case>
+	        <from-outcome>CadastroDeUsuario</from-outcome>
+	        <to-view-id>/CadastroDeUsuario.xhtml</to-view-id>
+	        <redirect/>
+	    </navigation-case>
+	</navigation-rule>
+	
+	
+</faces-config>

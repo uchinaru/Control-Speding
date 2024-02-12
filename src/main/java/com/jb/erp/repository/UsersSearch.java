@@ -9,6 +9,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import com.jb.erp.model.User;
+import com.jb.erp.util.encryptUtils;
 
 public class UsersSearch implements Serializable{
 	
@@ -32,11 +33,11 @@ public class UsersSearch implements Serializable{
 		return manager.createQuery("from User", User.class).getResultList();
 	}
 	
-	public User findUser(String login, String senha) {
+	public User findUserLogin(String login, String senha) {
 		   try {
 		        Query query = manager.createQuery("from User where login = :login and senha = :senha");
 		        query.setParameter("login", login);
-		        query.setParameter("senha", senha);
+		        query.setParameter("senha", encryptUtils.encryptPasswordMD5(senha));
 
 		        return (User) query.getSingleResult();
 		    } catch (NoResultException e) {
@@ -44,12 +45,12 @@ public class UsersSearch implements Serializable{
 		    }
 	}
 		
-	public void Save(User user) {
-		manager.merge(user);
+	public User Save(User user) {
+		return manager.merge(user);
 	}
 
-	public void Delete(User user) {
+	public User Delete(User user) {
 		user.setDeletado(true);
-		Save(user);
+		return Save(user);
 	}
 }
