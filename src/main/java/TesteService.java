@@ -29,7 +29,7 @@ public class TesteService {
 		
 		UsersSearch userSearch = new UsersSearch(manager);
 		
-		userSearch.Save(usuario);
+		userSearch.save(usuario);
 	}
 
 }
