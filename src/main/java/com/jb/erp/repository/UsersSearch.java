@@ -35,7 +35,7 @@ public class UsersSearch implements Serializable{
 	
 	public User findUserLogin(String login, String senha) {
 		   try {
-		        Query query = manager.createQuery("from User where login = :login and senha = :senha");
+		        Query query = manager.createQuery("from User where deletado is false and login = :login and senha = :senha");
 		        query.setParameter("login", login);
 		        query.setParameter("senha", encryptUtils.encryptPasswordMD5(senha));
 
