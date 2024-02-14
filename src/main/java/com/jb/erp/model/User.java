@@ -64,6 +64,9 @@ public class User implements Serializable {
 
 	@Column(nullable = false)
 	private Boolean deletado;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date ultimoLogin;
 
 	public Long getId() {
 		return id;
@@ -127,6 +130,14 @@ public class User implements Serializable {
 
 	public void setDeletado(Boolean deletado) {
 		this.deletado = deletado;
+	}
+	
+	public Date getUltimoLogin() {
+		return ultimoLogin;
+	}
+
+	public void setUltimoLogin(Date ultimoLogin) {
+		this.ultimoLogin = ultimoLogin;
 	}
 
 	@Override
