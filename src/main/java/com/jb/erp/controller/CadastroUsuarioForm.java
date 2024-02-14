@@ -3,13 +3,14 @@ package com.jb.erp.controller;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.jb.erp.model.TipoUsuario;
 import com.jb.erp.model.User;
-import com.jb.erp.repository.UsersSearch;
 import com.jb.erp.util.ServiceUtils;
 import com.jb.erp.util.encryptUtils;
 
@@ -19,7 +20,7 @@ public class CadastroUsuarioForm implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	ServiceUtils serviceUtils;
+	private ServiceUtils serviceUtils;
 	
 	private User user;
 	
@@ -37,13 +38,18 @@ public class CadastroUsuarioForm implements Serializable {
 	}
 	
 	public void cadastro() {
-		
-		user.setSenha(encryptUtils.encryptPasswordMD5(user.getSenha()));
-		user.setTipoUsuario(TipoUsuario.B);
-		user.setDeletado(false);
+		try {
+			user.setSenha(encryptUtils.encryptPasswordMD5(user.getSenha()));
+			user.setTipoUsuario(TipoUsuario.B);
+			user.setDeletado(false);
 
-		serviceUtils.salvarUser(user);
-		prepararNewUser();
+			serviceUtils.salvarUser(user);
+			prepararNewUser();
+
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro salvo", ""));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao salvar o registro ", ""));
+		}
 	}
 
 	public User getUser() {
