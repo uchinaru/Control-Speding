@@ -45,12 +45,12 @@ public class UsersSearch implements Serializable{
 		    }
 	}
 		
-	public User Save(User user) {
+	public User save(User user) {
 		return manager.merge(user);
 	}
 
-	public User Delete(User user) {
+	public User delete(User user) {
 		user.setDeletado(true);
-		return Save(user);
+		return save(user);
 	}
 }

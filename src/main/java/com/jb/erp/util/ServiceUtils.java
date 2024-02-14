@@ -13,7 +13,7 @@ public class ServiceUtils implements Serializable {
 
 	@Transacional
 	public void salvarUser(User usuario) {
-		userSearch.Save(usuario);
+		userSearch.save(usuario);
 	}
 
 	@Transacional
