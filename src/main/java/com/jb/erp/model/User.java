@@ -44,7 +44,7 @@ public class User implements Serializable {
 
 	@NotNull
 	@Size(min = 5)
-	@Column(length = 30, nullable = false)
+	@Column(length = 32, nullable = false)
 	private String senha;
 
 	@Email
