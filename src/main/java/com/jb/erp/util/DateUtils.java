@@ -3,15 +3,21 @@ package com.jb.erp.util;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DateUtils implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	
-	public String dateTimeStampFormat() {
-		Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-		String data = sdf.format(timeStamp);
-		return data;
+	public Date dateTimeStampFormat() {
+	       Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
+	        String formattedDate = sdf.format(timeStamp);
+	        try {
+	            return sdf.parse(formattedDate);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return null;
+	        }
 	} 
 }

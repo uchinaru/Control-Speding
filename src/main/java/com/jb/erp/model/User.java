@@ -66,7 +66,7 @@ public class User implements Serializable {
 	private Boolean deletado;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date ultimoLogin;
+	private Date dataUltimoLogin;
 
 	public Long getId() {
 		return id;
@@ -132,12 +132,12 @@ public class User implements Serializable {
 		this.deletado = deletado;
 	}
 	
-	public Date getUltimoLogin() {
-		return ultimoLogin;
+	public Date getDataUltimoLogin() {
+		return dataUltimoLogin;
 	}
 
-	public void setUltimoLogin(Date ultimoLogin) {
-		this.ultimoLogin = ultimoLogin;
+	public void setDataUltimoLogin(Date dataUltimoLogin) {
+		this.dataUltimoLogin = dataUltimoLogin;
 	}
 
 	@Override

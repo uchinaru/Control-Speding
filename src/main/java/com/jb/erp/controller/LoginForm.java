@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.jb.erp.model.User;
+import com.jb.erp.util.DateUtils;
 import com.jb.erp.util.MessagesUtils;
 import com.jb.erp.util.ServiceUtils;
 
@@ -21,6 +22,9 @@ public class LoginForm implements Serializable {
 	@Inject
 	private MessagesUtils messagesUtils;
 	
+	@Inject
+	private DateUtils dateUtils;
+	
 	private User usuario;
 	private String login ="";
 	private String senha ="";
@@ -32,7 +36,7 @@ public class LoginForm implements Serializable {
 		 if (usuario != null) {
 			 messagesUtils.info("Login efetuado com sucesso!");
 			 
-			 usuario.setUltimoLogin(new Date);
+			 usuario.setDataUltimoLogin(dateUtils.dateTimeStampFormat());
 			 serviceUtils.salvarUser(usuario);
 		}else {
 			messagesUtils.error("Erro ao logar");
