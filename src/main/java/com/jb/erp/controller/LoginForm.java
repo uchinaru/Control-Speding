@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import com.jb.erp.model.User;
 import com.jb.erp.repository.UsersSearch;
+import com.jb.erp.util.MessagesUtils;
 import com.jb.erp.util.ServiceUtils;
 import com.jb.erp.util.encryptUtils;
 
@@ -21,6 +22,9 @@ public class LoginForm implements Serializable {
 	@Inject
 	private ServiceUtils serviceUtils;
 	
+	@Inject
+	private MessagesUtils messagesUtils;
+	
 	private User usuario;
 	private String login ="";
 	private String senha ="";
@@ -30,10 +34,9 @@ public class LoginForm implements Serializable {
 		 usuario = serviceUtils.findLoginUser(login, senha);
 		
 		 if (usuario != null) {
-			 System.out.println("LOGOU !");
-			 FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Login efetuado com sucesso","Logado"));
+			 messagesUtils.info("Login efetuado com sucesso!");
 		}else {
-			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario não encontrado!","Erro no Login!"));
+			messagesUtils.error("Erro ao logar");
 		}
 	}
 	

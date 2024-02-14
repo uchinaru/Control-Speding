@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import com.jb.erp.model.TipoUsuario;
 import com.jb.erp.model.User;
+import com.jb.erp.util.MessagesUtils;
 import com.jb.erp.util.ServiceUtils;
 import com.jb.erp.util.encryptUtils;
 
@@ -21,6 +22,9 @@ public class CadastroUsuarioForm implements Serializable {
 	
 	@Inject
 	private ServiceUtils serviceUtils;
+	
+	@Inject
+	private MessagesUtils messagesUtils;
 	
 	private User user;
 	
@@ -45,10 +49,10 @@ public class CadastroUsuarioForm implements Serializable {
 
 			serviceUtils.salvarUser(user);
 			prepararNewUser();
-
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Registro salvo", ""));
+			
+			messagesUtils.info("Registro salvo com sucesso");
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao salvar o registro ", ""));
+			messagesUtils.error("Erro ao salvar o registro");
 		}
 	}
 
