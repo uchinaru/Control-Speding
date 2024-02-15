@@ -20,7 +20,7 @@
 					<p:inputText id="loginInput" value="#{loginForm.login}" placeholder="Digite o login"/>
 					<p:password id="senhaInput" value="#{loginForm.senha}" placeholder="Digite a senha"/>
 		
-					<p:commandButton value="Logar" class="btn" actionListener="#{loginForm.logar}" ajax="false" update="messages camposGrid"/>
+					<p:commandButton value="Logar" class="btn" action="#{loginForm.logar}" update="messages camposGrid"/>
 					<p:commandButton value="Cadastrar" class="btn" action="#{loginForm.cadastrar}"/>
 					<a href="/">recuperar senha</a>
 				</h:panelGrid>

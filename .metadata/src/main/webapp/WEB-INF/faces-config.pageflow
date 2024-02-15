@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf17070756683460" configfile="/Control-Speding/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf17070756683460" configfile="/Control-Spending/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="Login.xhtml" x="122" y="370" id="pf17079250435180" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf17079250435181 pf17079260319697" path="/Login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="CadastroDeUsuario.xhtml" x="338" y="178" id="pf17079250435193" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf17079250435181" path="/CadastroDeUsuario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="HomePage.xhtml" x="338" y="562" id="pf17079260319698" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf17079260319697" path="/HomePage.xhtml"/>
+  <links id="pf17079250435181" target="pf17079250435193" source="pf17079250435180" outcome="CadastroDeUsuario" redirect="true"/>
+  <links id="pf17079260319697" target="pf17079260319698" source="pf17079250435180" outcome="HomePage" redirect="true"/>
+</pageflow:Pageflow>

@@ -22,24 +22,21 @@ public class LoginForm implements Serializable {
 	@Inject
 	private MessagesUtils messagesUtils;
 	
-	@Inject
-	private DateUtils dateUtils;
-	
 	private User usuario;
 	private String login ="";
 	private String senha ="";
 	
-	public void logar() {
+	public String logar() {
 		
 		 usuario = serviceUtils.findLoginUser(login, senha);
 		
 		 if (usuario != null) {
 			 messagesUtils.info("Login efetuado com sucesso!");
 			 
-			 usuario.setDataUltimoLogin(dateUtils.dateTimeStampFormat());
-			 serviceUtils.salvarUser(usuario);
+			 return "HomePage";
 		}else {
 			messagesUtils.error("Erro ao logar");
+			return "";
 		}
 	}
 	
