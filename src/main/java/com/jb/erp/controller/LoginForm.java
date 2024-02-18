@@ -5,11 +5,14 @@ import java.io.Serializable;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import com.jb.erp.model.User;
 import com.jb.erp.util.DateUtils;
 import com.jb.erp.util.MessagesUtils;
 import com.jb.erp.util.ServiceUtils;
+import com.jb.erp.util.SessionUtils;
+
 
 @Named
 @ViewScoped
@@ -22,6 +25,9 @@ public class LoginForm implements Serializable {
 	@Inject
 	private MessagesUtils messagesUtils;
 	
+	@Inject
+	private SessionUtils sessionUtils;
+	
 	private User usuario;
 	private String login ="";
 	private String senha ="";
@@ -32,6 +38,9 @@ public class LoginForm implements Serializable {
 		
 		 if (usuario != null) {
 			 messagesUtils.info("Login efetuado com sucesso!");
+			 
+			 HttpSession session = sessionUtils.createSession();
+			 session.setAttribute("userId", usuario.getId());
 			 
 			 return "HomePage";
 		}else {
