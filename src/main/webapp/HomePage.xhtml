@@ -11,28 +11,113 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
+		<h:form id="formHomePage">
+			<div id="topMenu">
+				<p:growl id="messages" />
 
-		<div class="layout-wrapper">
-		
-			<div class="layout-topbar">
+				<p:menubar>
+					<p:submenu label="File" icon="pi pi-file">
+						<p:submenu label="New" icon="pi pi-briefcase">
+							<p:menuitem value="Project" url="#" />
+							<p:menuitem value="Other" url="#" />
+						</p:submenu>
+						<p:menuitem value="Open" url="#" />
+						<p:separator />
+						<p:menuitem value="Quit" url="#" />
+					</p:submenu>
 
+					<p:submenu label="Edit" icon="pi pi-pencil">
+						<p:menuitem value="Undo" url="#" icon="pi pi-angle-double-left" />
+						<p:menuitem value="Redo" url="#" icon="pi pi-angle-double-right" />
+					</p:submenu>
+
+					<p:submenu label="Help" icon="pi pi-question">
+						<p:menuitem value="Contents" url="#" />
+						<p:submenu label="Search" icon="pi pi-search">
+							<p:submenu label="Text">
+								<p:menuitem value="Workspace" url="#" />
+							</p:submenu>
+							<p:menuitem value="File" url="#" />
+						</p:submenu>
+					</p:submenu>
+
+					<p:submenu label="Actions" icon="pi pi-cog">
+						<p:submenu label="Ajax" icon="pi pi-refresh">
+							<p:menuitem value="Save" action="#{menuView.save}"
+								icon="pi pi-save" update="messages" />
+							<p:menuitem value="Update" action="#{menuView.update}"
+								icon="pi pi-refresh" update="messages" />
+						</p:submenu>
+						<p:submenu label="Non-Ajax" icon="pi pi-clone">
+							<p:menuitem value="Delete" action="#{menuView.delete}"
+								icon="pi pi-times" update="messages" ajax="false" />
+						</p:submenu>
+					</p:submenu>
+
+					<p:menuitem value="Quit" url="http://www.primefaces.org" icon="pi pi-times" />
+
+					<f:facet name="options">
+						<p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
+						<p:commandButton type="button" value="Logout" icon="pi pi-home" action="#{HomePageForm.logout}"/>
+					</f:facet>
+				</p:menubar>
 			</div>
-			
-			<div class="layout-sidebar">
 
-			</div>
-			
-			<div class="layout-content">
-				<div class="content-section content-source">
+			<div id="container">
 
+				<div id="assid">
+					<div id="a">
+						<p:sidebar widgetVar="sidebar1" baseZIndex="10000">
+							<p:commandButton value="Cancel"
+								oncomplete="PF('sidebar1').hide()" />
+						</p:sidebar>
+						<div class="item-assid">
+							<p:commandButton icon="pi pi-arrow-right"
+								oncomplete="PF('sidebar1').show()" />
+						</div>
+						<div class="item-assid">
+							<p:commandButton icon="pi pi-arrow-right"
+								oncomplete="PF('sidebar1').show()" />
+						</div>
+						<div class="item-assid">
+							<p:commandButton icon="pi pi-arrow-right"
+								oncomplete="PF('sidebar1').show()" />
+						</div>
 
-
+					</div>
+				</div>
 				
+				<div id="content">
+					<div class="card">
+						<p:card style="width: 25em">
+						
+							<f:facet name="header">
+								<img alt="user header"
+									src="https://www.primefaces.org/showcase/resources/demo/images/usercard.png" />
+							</f:facet>
+							
+							<f:facet name="title">
+				      		 	Bem vindo ao Control Spending 
+					   		</f:facet>
+					   		 
+							<f:facet name="subtitle">
+					         	Solução de Gestão de Despesas
+					   		</f:facet>
+
+							<p>Quando o seu negócio automatiza e integra a gestão de despesas, 
+							você pode registrar gastos de várias fontes, 
+							planejar e tomar decisões de gastos com base em dados precisos</p>
+
+							<f:facet name="footer">
+								<p:commandButton icon="pi pi-check" value="Save" />
+								<p:commandButton icon="pi pi-times" value="Cancel"
+									styleClass="ui-button-secondary" style="margin-left: .5em" />
+							</f:facet>
+						</p:card>
+					</div>
 				</div>
 			</div>
-				
-		</div>
-
+		</h:form>
 	</ui:define>
 
 </ui:composition>
