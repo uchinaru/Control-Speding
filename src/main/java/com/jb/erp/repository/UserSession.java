@@ -28,4 +28,8 @@ public class UserSession implements Serializable{
 			return 0L;
 		}
 	}
+	
+	public void deslogarUsuario() {
+		sessionUtils.sessionClose();
+	}
 }
