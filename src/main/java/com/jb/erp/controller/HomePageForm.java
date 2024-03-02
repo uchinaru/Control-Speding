@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.jb.erp.model.User;
 import com.jb.erp.repository.UserSession;
 import com.jb.erp.repository.UsersSearch;
+import com.jb.erp.util.MessagesUtils;
 
-@ViewScoped
+@SessionScoped	
 @Named
 public class HomePageForm implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -33,8 +36,18 @@ public class HomePageForm implements Serializable{
 	
 	@PostConstruct
 	public void init() {
-		usuario = userSearch.findUserFromId(userSession.getUserId());
-		userName = usuario.getLogin();
+		try {
+			Long idUser = userSession.getUserId();
+			if (idUser != null) {
+				usuario = userSearch.findUserFromId(idUser);
+				userName = usuario.getLogin();
+			}else {
+				userSession.redirectUserNotLogged("Login.xhtml");
+				}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
 	public String logout() {

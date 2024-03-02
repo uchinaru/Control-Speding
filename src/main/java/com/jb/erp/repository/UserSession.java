@@ -32,4 +32,8 @@ public class UserSession implements Serializable{
 	public void deslogarUsuario() {
 		sessionUtils.sessionClose();
 	}
+	
+	public void redirectUserNotLogged(String pagina) {
+		sessionUtils.redirect(pagina);
+	}
 }
