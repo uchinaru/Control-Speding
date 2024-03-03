@@ -74,7 +74,7 @@
 				</h:panelGrid>
 				
 				<p:commandButton id="btnCadastrar" value="Cadastrar" class="btn" ajax="false" update="messages camposGrid" actionListener="#{cadastroUser.cadastro}"/>
-				<p:commandButton value="Voltar" class="btn" action="#{cadastroUser.voltarLogin}"/>
+				<p:commandButton value="Voltar" class="btn" actionListener="#{cadastroUser.voltarLogin}" ajax="false"/>
 			</h:form>
 		</div>
 	</ui:define>

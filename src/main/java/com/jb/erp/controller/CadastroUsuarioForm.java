@@ -13,6 +13,7 @@ import com.jb.erp.model.TipoUsuario;
 import com.jb.erp.model.User;
 import com.jb.erp.util.MessagesUtils;
 import com.jb.erp.util.ServiceUtils;
+import com.jb.erp.util.SessionUtils;
 import com.jb.erp.util.encryptUtils;
 
 @Named(value = "cadastroUser")
@@ -26,6 +27,9 @@ public class CadastroUsuarioForm implements Serializable {
 	@Inject
 	private MessagesUtils messagesUtils;
 	
+	@Inject
+	private SessionUtils sessionUtils;
+	
 	private User user;
 	
     @PostConstruct
@@ -37,8 +41,8 @@ public class CadastroUsuarioForm implements Serializable {
 		user = new User();
 	}
 	
-	public String voltarLogin() {
-		return "Login";
+	public void voltarLogin() {
+		sessionUtils.redirect("Login.xhtml");
 	}
 	
 	public void cadastro() {
