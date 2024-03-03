@@ -1,6 +1,7 @@
 package com.jb.erp.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -28,29 +29,38 @@ public class LoginForm implements Serializable {
 	@Inject
 	private SessionUtils sessionUtils;
 	
+	@Inject
+	private DateUtils dateUtils;
+	
 	private User usuario;
 	private String login ="";
 	private String senha ="";
 	
-	public String logar() {
+	public void logar() {
 		
 		 usuario = serviceUtils.findLoginUser(login, senha);
 		
 		 if (usuario != null) {
-			 messagesUtils.info("Login efetuado com sucesso!");
+			 processaUsuario();
 			 
 			 HttpSession session = sessionUtils.createSession();
 			 session.setAttribute("userId", usuario.getId());
 			 
-			 return "HomePage";
+			 sessionUtils.redirect("HomePage.xhtml");
 		}else {
 			messagesUtils.error("Erro ao logar");
-			return "";
 		}
 	}
 	
-	public String cadastrar() {
-		return "CadastroDeUsuario";
+	private void processaUsuario() {
+		 usuario.setOnline(true);
+		 usuario.setDataUltimoLogin(new Date());
+		 usuario.setDataAniversario(dateUtils.transformaDataSimples(usuario.getDataAniversario()));
+		 serviceUtils.salvarUser(usuario);
+	}
+
+	public void cadastrar() {
+		sessionUtils.redirect("CadastroDeUsuario.xhtml");
 	}
 	
 	public String getLogin() {

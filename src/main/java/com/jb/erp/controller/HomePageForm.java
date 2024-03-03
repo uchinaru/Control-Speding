@@ -14,7 +14,9 @@ import javax.inject.Named;
 import com.jb.erp.model.User;
 import com.jb.erp.repository.UserSession;
 import com.jb.erp.repository.UsersSearch;
+import com.jb.erp.util.DateUtils;
 import com.jb.erp.util.MessagesUtils;
+import com.jb.erp.util.ServiceUtils;
 
 @Named
 @SessionScoped	
@@ -30,6 +32,12 @@ public class HomePageForm implements Serializable{
 	
 	@Inject
 	private UsersSearch userSearch;
+	
+	@Inject
+	private ServiceUtils serviceUtils;
+	
+	@Inject
+	private DateUtils dateUtils;
 	
 	private String userName;
 	private List<User> users = new ArrayList<User>();
@@ -51,8 +59,15 @@ public class HomePageForm implements Serializable{
 	}
 	
 	public String logout() {
+		processaUsuario();
 		userSession.deslogarUsuario();
 		return "Login";
+	}
+	
+	private void processaUsuario() {
+		 usuario.setOnline(false);
+		 usuario.setDataAniversario(dateUtils.transformaDataSimples(usuario.getDataAniversario()));
+		 serviceUtils.salvarUser(usuario);
 	}
 	
 	public String logoutIdle() {
