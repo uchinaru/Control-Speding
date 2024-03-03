@@ -15,8 +15,12 @@
 </h:head>
 
 <h:body>
+	<p:idleMonitor timeout="300000">
+		<p:ajax event="idle" listener="#{homePageForm.logoutIdle}" />
+	</p:idleMonitor>
+
 	<div id="conteudo">
-		<ui:insert name="conteudo"/>	
+		<ui:insert name="conteudo" />
 	</div>
 </h:body>
 	
