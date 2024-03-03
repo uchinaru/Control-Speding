@@ -16,8 +16,8 @@ import com.jb.erp.repository.UserSession;
 import com.jb.erp.repository.UsersSearch;
 import com.jb.erp.util.MessagesUtils;
 
-@SessionScoped	
 @Named
+@SessionScoped	
 public class HomePageForm implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -53,6 +53,10 @@ public class HomePageForm implements Serializable{
 	public String logout() {
 		userSession.deslogarUsuario();
 		return "Login";
+	}
+	
+	public String logoutIdle() {
+		return logout();
 	}
 
 	public String getUserName() {
