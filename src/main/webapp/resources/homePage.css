@@ -22,10 +22,42 @@ body {
 }
 
 #topMenu{
-	padding-top: 5px;
-	padding-left: 5px;
-	padding-right: 5px;
-	padding-bottom: 5px
+	display: flex;
+	width: 100%;
+	height: 4rem;
+	padding: 1rem;
+	align-items: center;
+	background-color: #f8f9fa;
+}
+.box-menu-itens-esquerda{
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.box-menu-itens-direita{
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.menu-itens-direita{
+	margin-left: 3px;
+}
+
+.menu-itens-esquerda h3{
+    font-family: "Roboto", sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    color: #333; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+    letter-spacing: 1px;
+}
+
+.menu-itens-esquerda{
+	margin-right: 3px;
 }
 
 #assid{
@@ -33,17 +65,12 @@ body {
 	height: auto;
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	align-items: initial;
 	align-content: center;
 	justify-content: center;
 	background-color: #f8f9fa;
 	border-radius: 10px;
 	margin: 5px;
-}
-
-.item-assid {
-    display: block;
-    margin-bottom: 10px;
 }
 
 #container {
