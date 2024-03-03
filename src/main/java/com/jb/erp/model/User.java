@@ -67,7 +67,9 @@ public class User implements Serializable {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUltimoLogin;
-
+	
+	private Boolean online; 
+	
 	public Long getId() {
 		return id;
 	}
@@ -138,6 +140,15 @@ public class User implements Serializable {
 
 	public void setDataUltimoLogin(Date dataUltimoLogin) {
 		this.dataUltimoLogin = dataUltimoLogin;
+	}
+	
+	
+	public Boolean getOnline() {
+		return online;
+	}
+
+	public void setOnline(Boolean online) {
+		this.online = online;
 	}
 
 	@Override
