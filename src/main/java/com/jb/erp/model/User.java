@@ -32,37 +32,30 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
 	@Pattern(regexp = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$", message = "O nome deve conter apenas letras e espaços")
-	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	private String nome;
 
-	@NotNull
 	@Size(min = 5)
-	@Column(length = 30, nullable = false, unique = true)
+	@Column(length = 30, unique = true)
 	private String login;
 
-	@NotNull
 	@Size(min = 5)
-	@Column(length = 32, nullable = false)
+	@Column(length = 32)
 	private String senha;
 
 	@Email
-	@NotNull
-	@Column(length = 100, nullable = false, unique = true)
+	@Column(length = 100, unique = true)
 	private String email;
 
-	@NotNull
 	@Past
 	@Temporal(TemporalType.DATE)
-	@Column(name = "data_aniversario", nullable = false)
+	@Column(name = "data_aniversario")
 	private Date dataAniversario;
 
-	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoUsuario tipoUsuario;
 
-	@Column(nullable = false)
 	private Boolean deletado;
 	
 	@Temporal(TemporalType.TIMESTAMP)
