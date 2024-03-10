@@ -30,6 +30,15 @@ public class DateUtils implements Serializable{
 			 return null;
 		}
 	}
+
+	public Date transformaDataSimples(String date) {
+		String formattedDate = sdfsimples.format(date);
+		try {
+			return sdfsimples.parse(formattedDate);
+		} catch (Exception e) {
+			 return null;
+		}
+	}
 	
 	public Date transformaDataCompleta(Date date) {
 		String formattedDate = sdfComHora.format(date);
