@@ -27,7 +27,7 @@
 						<div class="mrp-5">
 							<span class="ui-input-icon-left">
 								<i class="pi pi-user" />
-								<p:inputText placeholder="Nome do usuario" required="true" maxlength="100" value="#{cadastroUser.user.nome}"/>
+								<p:inputText placeholder="Nome do usuario" maxlength="100" value="#{cadastroUser.nomeUser}"/>
 							</span>
 						</div>
 					</p:toolbarGroup>
@@ -37,7 +37,7 @@
 						<div class="mrp-5">
 							<span class="ui-input-icon-left">
 								<i class="pi pi-user" />
-								<p:inputText placeholder="Digite o login" maxlength="30" required="true" value="#{cadastroUser.user.login}"/>
+								<p:inputText placeholder="Digite o login" maxlength="30" value="#{cadastroUser.loginUser}"/>
 							</span>
 						</div>
 					</p:toolbarGroup>
@@ -47,7 +47,7 @@
 						<div class="mrp-5">
 							<span class="ui-input-icon-left">
 								<i class="pi pi-user" />
-								<p:inputText placeholder="Digite a senha" required="true" maxlength="30" value="#{cadastroUser.user.senha}"/>
+								<p:inputText placeholder="Digite a senha" maxlength="30" value="#{cadastroUser.senhaUser}"/>
 							</span>
 						</div>
 					</p:toolbarGroup>
@@ -57,7 +57,7 @@
 						<div class="mrp-5">
 							<span class="ui-input-icon-left">
 								<i class="fa fa-envelope" />
-								<p:inputText placeholder="Digite o e-mail" maxlength="100" required="true" value="#{cadastroUser.user.email}"/>
+								<p:inputText placeholder="Digite o e-mail" maxlength="100" value="#{cadastroUser.emailUser}"/>
 							</span>
 						</div>
 					</p:toolbarGroup>
@@ -67,7 +67,7 @@
 						<div class="mrp-5">
 							<span class="ui-input-icon-left">
 								<i class="pi pi-calendar" />
-								<p:calendar value="#{cadastroUser.user.dataAniversario}"/>
+								<p:calendar value="#{cadastroUser.dataUser}"/>
 							</span>
 						</div>
 					</p:toolbarGroup>

@@ -1,16 +1,16 @@
 package com.jb.erp.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.jb.erp.model.TipoUsuario;
 import com.jb.erp.model.User;
+import com.jb.erp.util.DateUtils;
 import com.jb.erp.util.MessagesUtils;
 import com.jb.erp.util.ServiceUtils;
 import com.jb.erp.util.SessionUtils;
@@ -30,42 +30,117 @@ public class CadastroUsuarioForm implements Serializable {
 	@Inject
 	private SessionUtils sessionUtils;
 	
-	private User user;
+	@Inject
+	private DateUtils dateUtils;
 	
-    @PostConstruct
-    public void init() {
-        prepararNewUser();
-    }
-    
-	public void prepararNewUser() {
-		user = new User();
-	}
+	private String nomeUser;
+	private String loginUser;
+	private String senhaUser;
+	private String emailUser;
+	private Date dataUser;
 	
 	public void voltarLogin() {
 		sessionUtils.redirect("Login.xhtml");
 	}
 	
 	public void cadastro() {
-		try {
-			user.setSenha(encryptUtils.encryptPasswordMD5(user.getSenha()));
-			user.setTipoUsuario(TipoUsuario.B);
-			user.setDeletado(false);
-
-			serviceUtils.salvarUser(user);
-			prepararNewUser();
+		if (validate()) {
 			
-			messagesUtils.info("Registro salvo com sucesso");
-		} catch (Exception e) {
-			messagesUtils.error("Erro ao salvar o registro");
+			try {
+				User user = new User();
+				user.setNome(nomeUser);
+				user.setLogin(loginUser);
+				user.setSenha(encryptUtils.encryptPasswordMD5(senhaUser));
+				user.setEmail(emailUser);
+				user.setDataAniversario(dataUser);
+				user.setTipoUsuario(TipoUsuario.B);
+				user.setDeletado(false);
+
+				serviceUtils.salvarUser(user);
+
+				messagesUtils.info("Registro salvo com sucesso");
+			} catch (Exception e) {
+				messagesUtils.error("Erro ao salvar o registro");
+			}
+			
 		}
 	}
 
-	public User getUser() {
-		return user;
+	private boolean validate() {
+		
+		if("".equals(nomeUser)) {
+			messagesUtils.error("Preencha o campo Nome!");
+			return false;
+		}
+
+		if("".equals(loginUser)) {
+			messagesUtils.error("Preencha o campo Login!");
+			return false;
+		}
+		
+		if("".equals(senhaUser)) {
+			messagesUtils.error("Preencha o campo Senha!");
+			return false;
+		}
+		
+		if("".equals(emailUser)) {
+			messagesUtils.error("Preencha o campo E-mail!");
+			return false;
+		}
+		
+		int resultData = dateUtils.transformaDataSimples(dataUser).compareTo(dateUtils.transformaDataSimples(new Date()));
+		
+		if (resultData == 0) {
+			messagesUtils.error("Data inválida");
+			return false;
+		}
+		
+		if (resultData > 0) {
+			messagesUtils.error("Data inválida");
+			return false;
+		}
+		
+		return true;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public String getNomeUser() {
+		return nomeUser;
 	}
-	
+
+	public void setNomeUser(String nomeUser) {
+		this.nomeUser = nomeUser;
+	}
+
+	public String getLoginUser() {
+		return loginUser;
+	}
+
+	public void setLoginUser(String loginUser) {
+		this.loginUser = loginUser;
+	}
+
+	public String getSenhaUser() {
+		return senhaUser;
+	}
+
+	public void setSenhaUser(String senhaUser) {
+		this.senhaUser = senhaUser;
+	}
+
+	public String getEmailUser() {
+		return emailUser;
+	}
+
+	public void setEmailUser(String emailUser) {
+		this.emailUser = emailUser;
+	}
+
+	public Date getDataUser() {
+		return dataUser;
+	}
+
+	public void setDataUser(Date dataUser) {
+		this.dataUser = dataUser;
+	}
+
 }
