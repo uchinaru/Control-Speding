@@ -48,7 +48,6 @@ public class User implements Serializable {
 	@Column(length = 100, unique = true)
 	private String email;
 
-	@Past
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_aniversario")
 	private Date dataAniversario;
