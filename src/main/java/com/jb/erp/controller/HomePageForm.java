@@ -58,20 +58,19 @@ public class HomePageForm implements Serializable{
 		}
 	}
 	
-	public String logout() {
+	public void logout() {
 		processaUsuario();
 		userSession.deslogarUsuario();
-		return "Login";
+		userSession.redirectUserNotLogged("Login.xhtml");
 	}
 	
 	private void processaUsuario() {
 		 usuario.setOnline(false);
-		 usuario.setDataAniversario(dateUtils.transformaDataSimples(usuario.getDataAniversario()));
 		 serviceUtils.salvarUser(usuario);
 	}
 	
-	public String logoutIdle() {
-		return logout();
+	public void logoutIdle() {
+		logout();
 	}
 
 	public String getUserName() {
