@@ -37,21 +37,39 @@ public class LoginForm implements Serializable {
 	private String senha ="";
 	
 	public void logar() {
-		
-		 usuario = serviceUtils.findLoginUser(login, senha);
-		
-		 if (usuario != null) {
-			 processaUsuario();
-			 
-			 HttpSession session = sessionUtils.createSession();
-			 session.setAttribute("userId", usuario.getId());
-			 
-			 sessionUtils.redirect("HomePage.xhtml");
-		}else {
-			messagesUtils.error("Erro ao logar");
+
+		if (validate()) {
+
+			processaUsuario();
+
+			HttpSession session = sessionUtils.createSession();
+			session.setAttribute("userId", usuario.getId());
+
+			sessionUtils.redirect("HomePage.xhtml");
 		}
 	}
 	
+	private boolean validate() {
+
+		if ("".equals(login)) {
+			messagesUtils.warning("Preencha o campo login!");
+			return false;
+		}
+
+		if ("".equals(senha)) {
+			messagesUtils.warning("Preencha o campo senha!");
+			return false;
+		}
+		
+		usuario = serviceUtils.findLoginUser(login, senha);
+		if (usuario == null ) {
+			messagesUtils.error("Usuário não localizado, verifique o login e senha.");
+			return false;
+		}
+		
+		return true;
+	}
+
 	private void processaUsuario() {
 		 usuario.setOnline(true);
 		 usuario.setDataUltimoLogin(new Date());
