@@ -28,6 +28,9 @@ body {
 	padding: 1rem;
 	align-items: center;
 	background-color: #f8f9fa;
+	margin-bottom: 2px;
+	border-radius: 5px;
+	 box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 .box-menu-itens-esquerda{
 	width: 50%;
@@ -51,29 +54,26 @@ body {
     font-size: 25px;
     font-weight: 600;
     color: #333; 
-    text-transform: uppercase; 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
-    letter-spacing: 1px;
+	text-shadow: 2px 2px 2px #92CECE;
+ 	letter-spacing: 3px;
 }
 
 .menu-itens-esquerda{
 	margin-right: 5px;
 }
 
-#assid{
-	flex: 0 0 20%;
-	height: auto;
+#menu-aside{
+	width: 250px;
+	height: 100%;
 	display: flex;
 	flex-direction: row;
 	align-items: initial;
 	align-content: center;
 	justify-content: center;
-	background-color: #f8f9fa;
-	border-radius: 10px;
-	margin: 5px;
 }
 
 #container {
+	padding-top: 2px;
     display: flex;
 }
 
@@ -85,10 +85,7 @@ body {
 	align-items: center;
 	align-content: center;
 	justify-content: center;
-	background-color: #f8f9fa;
-	border-radius: 10px;
-	flex-direction: column;
-	margin: 5px;
+	flex-direction: row;
 }
 
 .item-content {
@@ -96,6 +93,5 @@ body {
 }
 
 .card {
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin: 10px;
 }

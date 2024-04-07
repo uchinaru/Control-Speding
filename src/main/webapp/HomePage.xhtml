@@ -21,7 +21,9 @@
 			<div id="topMenu">
 				<div class="box-menu-itens-esquerda">
 					<div class="menu-itens-esquerda">
-						<p:avatar size="large" icon="pi pi-chart-line" />
+						<p:avatar styleClass="mr-2" size="xlarge" shape="circle">
+							<p:graphicImage library="img" name="logo.png" />
+						</p:avatar>
 					</div>
 					<div class="menu-itens-esquerda">
 						<H3>Control Spending</H3>
@@ -30,7 +32,7 @@
 
 				<div class="box-menu-itens-direita">
 					<div class="menu-itens-direita">
-				        <p:menuButton id="perfil" value="Perfil #{homePageForm.userName}">
+				        <p:menuButton id="perfil" value="Perfil">
 				            <p:menuitem value="Visualizar" icon="pi pi-user"/>
 				        </p:menuButton>
 					</div>
@@ -42,12 +44,12 @@
 
 			<div id="container">
 
-				<div id="assid">
+				<div id="menu-aside">
 					<p:panelMenu style="width:100%">
 						<p:submenu label="Relatórios">
 							<p:menuitem value="Despesas" ajax="false" icon="pi pi-chart-pie" />
 						</p:submenu>
-						<p:submenu label="Navigations">
+						<p:submenu label="Administração">
 							<p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link" />
 							<p:menuitem value="Internal" icon="pi pi-upload" />
 						</p:submenu>
@@ -68,7 +70,7 @@
 								#{homePageForm.userName},
 				      		 	Bem vindo ao Control Spending 
 					   		</f:facet>
-					   		 
+				   		 
 							<f:facet name="subtitle">
 					         	Solução de Gestão de Despesas
 					   		</f:facet>
