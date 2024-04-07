@@ -7,7 +7,7 @@
 	template="WEB-INF/template/LayoutHomePage.xhtml">
 
 	<ui:define name="title-aba-navegador">
-		Home Page - Control Speding
+		Home Page - Control Spending
 	</ui:define>
 
 	<ui:define name="conteudo">
@@ -47,7 +47,7 @@
 				<div id="menu-aside">
 					<p:panelMenu style="width:100%">
 						<p:submenu label="Relatórios">
-							<p:menuitem value="Despesas" ajax="false" icon="pi pi-chart-pie" />
+							<p:menuitem value="Despesas" ajax="false" icon="pi pi-chart-pie" action="#{homePageForm.cadastrarDespesa}" />
 						</p:submenu>
 						<p:submenu label="Administração">
 							<p:menuitem value="Website" url="http://www.primefaces.org" icon="pi pi-external-link" />

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="WEB-INF/template/LayoutReports.xhtml">
+
+	<ui:define name="title-aba-navegador">
+		Despesas - Control Spending
+	</ui:define>
+	
+	<ui:define name="conteudo">
+
+		<h:form id="formHomePage">
+
+			<div id="topMenu">
+				<div class="box-menu-itens-esquerda">
+					<div class="menu-itens-esquerda">
+						<p:avatar styleClass="mr-2" size="xlarge" shape="circle">
+							<p:graphicImage library="img" name="logo.png" />
+						</p:avatar>
+					</div>
+					<div class="menu-itens-esquerda">
+						<H3> Despesas - Control Spending</H3>
+					</div>
+				</div>
+
+				<div class="box-menu-itens-direita">
+					<div class="menu-itens-direita">
+						<p:menuButton id="perfil" value="Perfil">
+							<p:menuitem value="Visualizar" icon="pi pi-user" />
+						</p:menuButton>
+					</div>
+					<div class="menu-itens-direita">
+						<p:commandButton id="logout" value="Logout" icon="pi pi-home"
+							action="#{homePageForm.logout}"
+							styleClass="ui-button-danger ui-button-raised ui-button-flat" />
+					</div>
+				</div>
+			</div>
+			
+			
+			
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

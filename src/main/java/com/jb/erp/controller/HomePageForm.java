@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -38,6 +36,9 @@ public class HomePageForm implements Serializable{
 	
 	@Inject
 	private DateUtils dateUtils;
+	
+	@Inject
+	private MessagesUtils messagesUtils;
 	
 	private String userName;
 	private List<User> users = new ArrayList<User>();
@@ -72,7 +73,11 @@ public class HomePageForm implements Serializable{
 	public void logoutIdle() {
 		logout();
 	}
-
+	
+	public void cadastrarDespesa() {
+		userSession.redirectUserNotLogged("DespesasList.xhtml");
+	}
+	
 	public String getUserName() {
 		return userName;
 	}

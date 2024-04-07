@@ -29,6 +29,17 @@ public class MessagesUtils implements Serializable{
 	public void error(String msg) {
 		add(msg, FacesMessage.SEVERITY_ERROR, "");
 	}
+
+	public void info(String msg, String componente) {
+		add(msg, FacesMessage.SEVERITY_INFO, componente);
+	}
 	
+	public void warning(String msg, String componente) {
+		add(msg, FacesMessage.SEVERITY_WARN, componente);
+	}
+	
+	public void error(String msg, String componente) {
+		add(msg, FacesMessage.SEVERITY_ERROR, componente);
+	}
 	
 }
