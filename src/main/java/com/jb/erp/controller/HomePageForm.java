@@ -10,35 +10,14 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.jb.erp.model.User;
-import com.jb.erp.repository.UserSession;
-import com.jb.erp.repository.UsersSearch;
-import com.jb.erp.util.DateUtils;
-import com.jb.erp.util.MessagesUtils;
-import com.jb.erp.util.ServiceUtils;
 
 @Named
 @SessionScoped	
-public class HomePageForm implements Serializable{
+public class HomePageForm extends FormAbstract implements Serializable{
 	private static final long serialVersionUID = 1L;
-
-	
-	@Inject
-	private UserSession userSession;
 	
 	@Inject
 	private User usuario;
-	
-	@Inject
-	private UsersSearch userSearch;
-	
-	@Inject
-	private ServiceUtils serviceUtils;
-	
-	@Inject
-	private DateUtils dateUtils;
-	
-	@Inject
-	private MessagesUtils messagesUtils;
 	
 	private String userName;
 	private List<User> users = new ArrayList<User>();
@@ -46,12 +25,12 @@ public class HomePageForm implements Serializable{
 	@PostConstruct
 	public void init() {
 		try {
-			Long idUser = userSession.getUserId();
+			Long idUser = userLogged();
 			if (idUser != null) {
-				usuario = userSearch.findUserFromId(idUser);
+				usuario = getServiceUserUtils().findById(idUser);
 				userName = usuario.getLogin();
 			}else {
-				userSession.redirectUserNotLogged("Login.xhtml");
+				redirectToPage("Login.xhtml");
 				}
 		} catch (Exception e) {
 			
@@ -60,22 +39,19 @@ public class HomePageForm implements Serializable{
 	}
 	
 	public void logout() {
-		processaUsuario();
-		userSession.deslogarUsuario();
-		userSession.redirectUserNotLogged("Login.xhtml");
-	}
-	
-	private void processaUsuario() {
-		 usuario.setOnline(false);
-		 serviceUtils.salvarUser(usuario);
+		logoutUserApplication();
 	}
 	
 	public void logoutIdle() {
 		logout();
 	}
 	
+	public void voltar() {
+		redirectToPage("HomePage.xhtml");
+	}
+	
 	public void cadastrarDespesa() {
-		userSession.redirectUserNotLogged("DespesasList.xhtml");
+		redirectToPage("DespesasList.xhtml");
 	}
 	
 	public String getUserName() {
