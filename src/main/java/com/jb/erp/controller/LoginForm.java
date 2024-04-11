@@ -17,8 +17,10 @@ public class LoginForm extends FormAbstract implements Serializable {
 	private String login ="";
 	private String senha ="";
 	
-	public void logar() {
-
+	public void logar() throws InterruptedException {
+		
+		Thread.sleep(1100);
+		
 		if (validate()) {
 
 			loginUserApplication(usuario);
@@ -27,6 +29,7 @@ public class LoginForm extends FormAbstract implements Serializable {
 
 			redirectToPage("HomePage.xhtml");
 		}
+		
 	}
 	
 	private boolean validate() {
