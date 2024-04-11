@@ -5,14 +5,14 @@ import javax.inject.Inject;
 import com.jb.erp.model.User;
 import com.jb.erp.repository.UsersSearch;
 
-public class ServiceUtils implements Serializable {
+public class ServiceUserUtils implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	UsersSearch userSearch;
 
 	@Transacional
-	public void salvarUser(User usuario) {
+	public void saveUser(User usuario) {
 		userSearch.save(usuario);
 	}
 
@@ -20,5 +20,10 @@ public class ServiceUtils implements Serializable {
 	public User findLoginUser(String login, String Senha) {
 
 		return userSearch.findUserLogin(login, Senha);
+	}
+	
+	@Transacional
+	public User findById(Long id) {
+		return userSearch.findUserFromId(id);
 	}
 }
