@@ -12,7 +12,7 @@ import com.jb.erp.model.TipoUsuario;
 import com.jb.erp.model.User;
 import com.jb.erp.util.DateUtils;
 import com.jb.erp.util.MessagesUtils;
-import com.jb.erp.util.ServiceUtils;
+import com.jb.erp.util.ServiceUserUtils;
 import com.jb.erp.util.SessionUtils;
 import com.jb.erp.util.encryptUtils;
 
@@ -22,7 +22,7 @@ public class CadastroUsuarioForm implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private ServiceUtils serviceUtils;
+	private ServiceUserUtils serviceUtils;
 	
 	@Inject
 	private MessagesUtils messagesUtils;
@@ -56,7 +56,7 @@ public class CadastroUsuarioForm implements Serializable {
 				user.setTipoUsuario(TipoUsuario.B);
 				user.setDeletado(false);
 
-				serviceUtils.salvarUser(user);
+				serviceUtils.saveUser(user);
 
 				messagesUtils.info("Registro salvo com sucesso");
 			} catch (Exception e) {
