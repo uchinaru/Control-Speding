@@ -34,6 +34,9 @@ public class FormAbstract implements Serializable {
 	@Inject
 	private MessagesUtils messagesUtils;
 	
+	@Inject
+	private User usuario;
+	
 	public Long userLogged() {
 		return userSession.getUserId();
 	}
@@ -48,11 +51,10 @@ public class FormAbstract implements Serializable {
 	
 	public void logoutUserApplication() {
 		try {
-			Long userId = userLogged();
-			User User = usersSearch.findUserFromId(userId);
+			usuario = usersSearch.findUserFromId(userLogged());
 			
-			User.setOnline(false);
-			serviceUserUtils.saveUser(User);
+			usuario.setOnline(false);
+			serviceUserUtils.saveUser(usuario);
 			sessionClose();
 			redirectToPage("Login.xhtml");
 
@@ -66,6 +68,24 @@ public class FormAbstract implements Serializable {
 		user.setDataUltimoLogin(new Date());
 		user.setDataAniversario(dateUtils.transformaDataSimples(user.getDataAniversario()));
 		serviceUserUtils.saveUser(user);
+	}
+	
+	public boolean loadPageWhifUserLogged() {
+		if (userLogged() != null && userLogged() > 0) {
+			usuario = usersSearch.findUserFromId(userLogged());
+			return true;
+		} else {
+			redirectToPage("Login.xhtml");
+		}
+		return false;
+	}
+	
+	public void backHomePage() {
+		redirectToPage("HomePage.xhtml");
+	}
+	
+	public void logoutIdle() {
+		logoutUserApplication();
 	}
 
 	public SessionUtils getSessionUtils() {
@@ -115,7 +135,13 @@ public class FormAbstract implements Serializable {
 	public void setMessagesUtils(MessagesUtils messagesUtils) {
 		this.messagesUtils = messagesUtils;
 	}
-	
-	
+
+	public User getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
+	}
 	
 }
