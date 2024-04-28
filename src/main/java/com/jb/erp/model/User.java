@@ -22,6 +22,8 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.jb.erp.repository.TipoUsuario;
+
 @Entity
 @Table(name = "usuarios")
 public class User implements Serializable {
@@ -53,11 +55,13 @@ public class User implements Serializable {
 	private Date dataAniversario;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_usuario")
 	private TipoUsuario tipoUsuario;
 
 	private Boolean deletado;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_ultimo_login")
 	private Date dataUltimoLogin;
 	
 	private Boolean online; 
