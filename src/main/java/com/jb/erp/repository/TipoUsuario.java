@@ -1,4 +1,4 @@
-package com.jb.erp.model;
+package com.jb.erp.repository;
 
 public enum TipoUsuario {
 	
