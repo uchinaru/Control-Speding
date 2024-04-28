@@ -8,8 +8,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.jb.erp.model.TipoUsuario;
 import com.jb.erp.model.User;
+import com.jb.erp.repository.TipoUsuario;
 import com.jb.erp.util.DateUtils;
 import com.jb.erp.util.MessagesUtils;
 import com.jb.erp.util.ServiceUserUtils;

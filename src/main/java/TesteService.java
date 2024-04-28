@@ -4,8 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.jb.erp.model.TipoUsuario;
 import com.jb.erp.model.User;
+import com.jb.erp.repository.TipoUsuario;
 import com.jb.erp.repository.UsersSearch;
 import com.jb.erp.util.encryptUtils;
 
