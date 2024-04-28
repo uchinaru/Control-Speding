@@ -109,7 +109,7 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 		total = listarDespesas.size();
 	}
 	
-	private void clearDados() {
+	public void clearDados() {
 		nome = null;
 		valor = null;
 		data = null;

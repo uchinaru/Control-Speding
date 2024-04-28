@@ -112,7 +112,7 @@
 					</h:panelGrid>
 					
 					<p:commandButton value="Salvar" style="margin: 3px" actionListener="#{despesasListReport.salvar}" update="datatable formReport formLayout" />
-					<p:commandButton value="Cancelar" onclick="PF('novoRegistro').hide()"/>
+					<p:commandButton value="Cancelar" onclick="PF('novoRegistro').hide()" actionListener="#{despesasListReport.clearDados}" update="modalParams"/>
 
 				</p:dialog>
 		</h:form>
