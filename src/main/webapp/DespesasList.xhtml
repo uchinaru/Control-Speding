@@ -9,41 +9,114 @@
 	<ui:define name="title-aba-navegador">
 		Despesas - Control Spending
 	</ui:define>
-	
-	<ui:define name="conteudo">
 
-		<h:form id="formHomePage">
-
-			<div id="topMenu">
-				<div class="box-menu-itens-esquerda">
-					<div class="menu-itens-esquerda">
-						<p:avatar styleClass="mr-2" size="xlarge" shape="circle">
-							<p:graphicImage library="img" name="logo.png" />
-						</p:avatar>
-					</div>
-					<div class="menu-itens-esquerda">
-						<H3> Despesas - Control Spending</H3>
-					</div>
-				</div>
-
-				<div class="box-menu-itens-direita">
-					<div class="menu-itens-direita">
-						<p:menuButton id="perfil" value="Perfil">
-							<p:menuitem value="Visualizar" icon="pi pi-user" />
-						</p:menuButton>
-					</div>
-					<div class="menu-itens-direita">
-						<p:commandButton id="logout" value="Logout" icon="pi pi-home"
-							action="#{homePageForm.logout}"
-							styleClass="ui-button-danger ui-button-raised ui-button-flat" />
-					</div>
-				</div>
-			</div>
-			
-			
-			
-		</h:form>
-
+	<ui:define name="titulo-relatorio">
+		<H3>Despesas - Control Spending</H3>
 	</ui:define>
+	
+	<ui:define name="topbuttons">
+		<p:commandButton type="button" value="Novo registro" icon="pi pi-file" styleClass="ui-button-raised ui-button-info" onclick="PF('novoRegistro').show()"/>
+	
+		<p:commandButton title="Editar" icon="fa fa-edit" styleClass="ui-button-raised ui-button-warning" update="formReport toolbar formLayout" process="@this" style="margin-left: 2px" disabled="#{not despesasListReport.despesaSelected}" actionListener="#{despesasListReport.despesaSelecionada()}" oncomplete="PF('novoRegistro').show()">
+			<p:resetInput target="formReport:modalParams"/>
+		</p:commandButton>
+		
+		<p:commandButton title="Excluir" icon="fa fa-trash" styleClass="ui-button-raised ui-button-danger" update="formReport toolbar formLayout" process="@this" style="margin-left: 2px" disabled="#{not despesasListReport.despesaSelected}" actionListener="#{despesasListReport.deletarDespesa()}">
+			<p:resetInput target="formReport:modalParams"/>
+		</p:commandButton>		
+	</ui:define>
+				
+	<ui:define name="conteudo">
+	
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{despesasListReport.init}" />
+		</f:metadata>
+	
+			<h:form id="formReport">
+			
+				<p:dataTable id="datatable" 
+							 value="#{despesasListReport.listarDespesas}" 
+							 var="despesa" 
+							 stripedRows="true" 
+							 selectionMode="single" 
+							 paginator="true" 
+							 paginatorPosition="bottom" 
+							 rows="15" 
+							 selection="#{despesasListReport.despesa}" 
+							 rowKey="#{despesa.id}" 
+							 emptyMessage="Nenhum dado encontrado" >
+					
+					<p:ajax event="rowSelect" update="formLayout:toolbar"/>
+					<p:ajax event="rowUnselect" update="formLayout:toolbar"/>
+					
+					<p:column headerText="Nome">
+						<h:outputText value="#{despesa.nome}" />
+					</p:column>
+	
+					<p:column headerText="Valor">
+						<h:outputText value="#{despesa.valor}">
+							<f:convertNumber type="currency" currencySymbol="R$"/>
+						</h:outputText>
+					</p:column>
+	
+					<p:column headerText="Data">
+						<h:outputText value="#{despesa.data}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+	
+					<p:column headerText="Quantidade">
+						<h:outputText value="#{despesa.quantidade}" />
+					</p:column>
+					
+					<p:column headerText="Forma de Pagamento">
+						<h:outputText value="#{despesa.tipoPagamentos}"/>
+					</p:column>
+					
+					<p:column headerText="Descrição">
+						<h:outputText value="#{despesa.descricao}"/>
+					</p:column>
 
+					<f:facet name="footer">
+						<span class="font-bold"> Registros: #{despesasListReport.total}</span>
+					</f:facet>
+			</p:dataTable>
+
+				<!-- Modal -->
+				<p:dialog id="modalParams" header="Detalhar Itens e Custos" widgetVar="novoRegistro" modal="true" resizable="false" showEffect="fade" width="660" >
+					
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Nome: " for="inputNome" />
+						<p:inputText id="inputNome" value="#{despesasListReport.nome}" />
+						
+						<p:outputLabel value="Valor: " for="inputValor" />
+						<p:inputText id="inputValor" value="#{despesasListReport.valor}" type="number"/>
+						
+						<p:outputLabel value="Data: " for="inputData"/>
+						<p:calendar id="inputData" value="#{despesasListReport.data}" showOn="button" pattern="dd/MM/yyyy"/>
+
+						<p:outputLabel value="Quantidade:" for="inputQtd"/>
+						<p:inputText id="inputQtd" size="9" value="#{despesasListReport.quantidade}"/>
+						
+						<p:outputLabel value="Forma de pagamento: " for="formasPagamento"/>
+						<p:selectOneMenu id="formasPagamento" value="#{despesasListReport.formaDePagamento}">
+							<f:selectItem itemLabel="Selecione"/>
+							<f:selectItems value="#{despesasListReport.tipoPagamentos}" var="tipoPagamentos" itemLabel="#{tipoPagamentos.descricao}" itemValue="#{tipoPagamentos}"/>							
+						</p:selectOneMenu>
+					
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1">
+						<p:outputLabel value="Descrição: " for="inputDesc1" />
+						<p:inputTextarea id="inputDesc1" cols="80" value="#{despesasListReport.descricao}"/>
+					</h:panelGrid>
+					
+					<p:commandButton value="Salvar" style="margin: 3px" actionListener="#{despesasListReport.salvar}" update="datatable formReport formLayout" />
+					<p:commandButton value="Cancelar" onclick="PF('novoRegistro').hide()"/>
+
+				</p:dialog>
+		</h:form>
+			
+	</ui:define>
+	
 </ui:composition>
