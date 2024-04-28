@@ -37,14 +37,22 @@ body {
 	margin-left: 5px;
 }
 
-#topMenu{
+.topMenu{
 	display: flex;
 	width: 100%;
 	height: 4rem;
 	padding: 1rem;
 	align-items: center;
 	background-color: #f8f9fa;
-	margin-bottom: 2px;
+	margin-bottom: 10px;
 	border-radius: 5px;
-	 box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.formReport{
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.autocomplete-box{
+	margin-right: 5px;
 }
