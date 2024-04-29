@@ -143,7 +143,7 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 	public void deletarDespesa() {
 		
 		if (serviceDespesas.deleteLogico(despesa)) {
-			getMessagesUtils().info("Delete lógico efetuado com sucesso!");
+			getMessagesUtils().info("Registro deletado!");
 		}else {
 			getMessagesUtils().warning("Algo deu errado.");
 		}
