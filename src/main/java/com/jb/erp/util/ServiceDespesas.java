@@ -1,6 +1,7 @@
 package com.jb.erp.util;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.inject.Default;
@@ -33,5 +34,10 @@ public class ServiceDespesas implements Serializable{
 	@Transacional
 	public List<Despesa> findWithTermo(String termo, Long userId) {
 		return despesasSearch.findByDespesa(termo, userId);
+	}
+	
+	@Transacional
+	public List<Despesa> findWithTermo(String termo, Long userId, Date dataInit, Date dataFim) {
+		return despesasSearch.findByDespesa(termo, userId, dataInit, dataFim);
 	}
 }

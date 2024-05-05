@@ -1,6 +1,7 @@
 package com.jb.erp.repository;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.inject.Default;
@@ -31,6 +32,17 @@ public class DespesasSearch implements Serializable{
 		return manager.find(Despesa.class, id);
 	}
 	
+	public List<Despesa> findByDespesa(String nome, Long userId, Date dataInit, Date dataFim) {
+		
+		Query query = manager.createQuery("from Despesa where deletado = 0 and userId = :userId and nome like :nome and dataCusto between :dataInit and :dataFim");
+		query.setParameter("userId", userId);
+		query.setParameter("nome", nome + "%");
+		query.setParameter("dataInit", dataInit);
+		query.setParameter("dataFim", dataFim);
+		
+		return query.getResultList();
+	}
+
 	public List<Despesa> findByDespesa(String nome, Long userId) {
 		
 		Query query = manager.createQuery("from Despesa where deletado = 0 and userId = :userId and nome like :nome");
