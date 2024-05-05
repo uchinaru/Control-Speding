@@ -3,6 +3,7 @@ package com.jb.erp.util;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateUtils implements Serializable{
@@ -47,6 +48,27 @@ public class DateUtils implements Serializable{
 		} catch (Exception e) {
 			 return null;
 		}
+	}
+	
+	public int getMonth(Date date) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		
+		return c.get(Calendar.MONTH);
+		
+	}
+	
+	public String getMes(Date date) {
+		String result = "";
+		
+		String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
+		
+		for (int i = 0; i < meses.length; i++) {
+			if (i == getMonth(date))
+				result = meses[i];
+		}
+		
+		return result;
 	}
 	
 }
