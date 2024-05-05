@@ -26,8 +26,9 @@ public class Despesa implements Serializable{
 	private String nome;
 	
 	private Double valor;
-	
-	private Date data;
+
+	@Column(name = "data_gasto")
+	private Date dataCusto;
 	
 	private int quantidade;
 	
@@ -39,6 +40,9 @@ public class Despesa implements Serializable{
 	
 	@Column(name = "user_id")
 	private Long userId;
+	
+	@Column(name = "mes_gasto")
+	private String mesGasto;
 	
 	private boolean deletado;
 
@@ -66,12 +70,12 @@ public class Despesa implements Serializable{
 		this.valor = valor;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getDataCusto() {
+		return dataCusto;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataCusto(Date data) {
+		this.dataCusto = data;
 	}
 
 	public int getQuantidade() {
@@ -112,6 +116,14 @@ public class Despesa implements Serializable{
 
 	public void setTipoPagamentos(TipoPagamentos tipoPagamentos) {
 		this.tipoPagamentos = tipoPagamentos;
+	}
+
+	public String getMesGasto() {
+		return mesGasto;
+	}
+
+	public void setMesGasto(String mesGasto) {
+		this.mesGasto = mesGasto;
 	}
 	
 }
