@@ -29,4 +29,9 @@ public class ServiceDespesas implements Serializable{
 	public boolean deleteLogico(Despesa despesa) {
 		return despesasSearch.deletar(despesa);
 	}
+	
+	@Transacional
+	public List<Despesa> findWithTermo(String termo, Long userId) {
+		return despesasSearch.findByDespesa(termo, userId);
+	}
 }

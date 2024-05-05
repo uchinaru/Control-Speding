@@ -16,6 +16,9 @@ public class DespesasSearch implements Serializable{
 	
 	@Inject
 	private EntityManager manager;
+	
+	@Inject
+	private UserSession userSession;
 
 	public DespesasSearch() {
 	}
@@ -26,6 +29,15 @@ public class DespesasSearch implements Serializable{
 	
 	public Despesa findById(Long id) {
 		return manager.find(Despesa.class, id);
+	}
+	
+	public List<Despesa> findByDespesa(String nome, Long userId) {
+		
+		Query query = manager.createQuery("from Despesa where deletado = 0 and userId = :userId and nome like :nome");
+		query.setParameter("userId", userId);
+		query.setParameter("nome", nome + "%");
+		
+		return query.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")
