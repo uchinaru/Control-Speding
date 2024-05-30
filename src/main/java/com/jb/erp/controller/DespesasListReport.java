@@ -35,10 +35,13 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 	private String descricao;
 	private int total;
 	
+	private String termoPesquisa = "";
+	private Date dataInicial = null;
+	private Date dataFinal  = null;
+	
 	@PostConstruct
 	public void init() {
 		loadPageWhifUserLogged();
-		listarDespesas();
 	}
 	
 	public boolean validade() {
@@ -83,7 +86,8 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 			
 			despesa.setNome(nome);
 			despesa.setValor(Double.parseDouble(valor.replace(",", ".")));
-			despesa.setData(dateUtils.transformaDataSimples(data));
+			despesa.setDataCusto(dateUtils.transformaDataSimples(data));
+			despesa.setMesGasto(dateUtils.getMes(data));
 			despesa.setQuantidade(Integer.parseInt(quantidade));
 			despesa.setTipoPagamentos(formaDePagamento);
 			despesa.setDescricao(descricao);
@@ -116,6 +120,9 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 		quantidade = null;
 		formaDePagamento = null;
 		descricao = null;
+		dataInicial = null;
+		dataFinal = null;
+		despesa = null;
 	}
 	
 	public boolean isDespesaSelected() {
@@ -126,11 +133,9 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 
 		if (despesa != null && despesa.getId() != null) {
 			
-			getMessagesUtils().info("Id Despesa: " + despesa.getId() + " Nome: " + despesa.getNome());
-			
 			nome = despesa.getNome();
 			valor = String.valueOf(despesa.getValor());
-			data = despesa.getData();
+			data = despesa.getDataCusto();
 			quantidade = String.valueOf(despesa.getQuantidade());
 			formaDePagamento = despesa.getTipoPagamentos();
 			descricao = despesa.getDescricao();		
@@ -148,6 +153,21 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 			getMessagesUtils().warning("Algo deu errado.");
 		}
 		
+	}
+	
+	public void pesquisar() {
+		
+		if(listarDespesas != null)
+		listarDespesas.clear();
+		
+		if(dataInicial != null && dataFinal != null) {
+			listarDespesas = serviceDespesas.findWithTermo(termoPesquisa, userLogged(), dataInicial, dataFinal);
+		} else {
+			listarDespesas = serviceDespesas.findWithTermo(termoPesquisa, userLogged());
+		}
+		
+		total = listarDespesas.size();
+		termoPesquisa = "";
 	}
 	
 	public String getNome() {
@@ -224,6 +244,30 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 
 	public void setListarDespesas(List<Despesa> listarDespesas) {
 		this.listarDespesas = listarDespesas;
+	}
+
+	public String getTermoPesquisa() {
+		return termoPesquisa;
+	}
+
+	public void setTermoPesquisa(String termoPesquisa) {
+		this.termoPesquisa = termoPesquisa;
+	}
+
+	public Date getDataInicial() {
+		return dataInicial;
+	}
+
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+
+	public Date getDataFinal() {
+		return dataFinal;
+	}
+
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
 	}
 
 }
