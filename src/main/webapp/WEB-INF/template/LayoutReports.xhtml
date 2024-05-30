@@ -3,6 +3,7 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	
 	<h:head>
@@ -14,49 +15,51 @@
 		<h:outputStylesheet name="estiloReports.css"/>
 	</h:head>
 
-	<h:body>
-		<h:form id="formLayout">
-			<!-- MENSAGENS DO FORM -->		
-			<p:growl id="messages"/>
-			
-			<!-- MENU SUPERIOR -->
-			<div class="topMenu">
-				<div class="box-menu-itens-esquerda">
-					<div class="menu-itens-esquerda">
-						<p:avatar styleClass="mr-2" size="xlarge" shape="circle">
-							<p:graphicImage library="img" name="logo.png" />
-						</p:avatar>
-					</div>
-					<div class="menu-itens-esquerda">
-						<!-- TITULO DO RELATORIO -->
-						<ui:insert name="titulo-relatorio" />
-					</div>
-				</div>
-	
-				<div class="box-menu-itens-direita">
+		<h:body>
+		
+			<ui:insert name="initcode" />
+
+			<h:form id="formLayout">
+				<!-- MENSAGENS DO FORM -->		
+				<p:growl id="messages"/>
 				
-					<div class="menu-itens-direita">
-						<p:commandButton icon="pi pi-home" value="Voltar" action="#{homePageForm.backHomePage}" update="messages"/>
+				<!-- MENU SUPERIOR -->
+				<div class="topMenu">
+					<div class="box-menu-itens-esquerda">
+						<div class="menu-itens-esquerda">
+							<p:avatar styleClass="mr-2" size="xlarge" shape="circle">
+								<p:graphicImage library="img" name="logo.png" />
+							</p:avatar>
+						</div>
+						<div class="menu-itens-esquerda">
+							<!-- TITULO DO RELATORIO -->
+							<ui:insert name="titulo-relatorio" />
+						</div>
 					</div>
-	
-					<div class="menu-itens-direita">
-						<p:commandButton id="logout" value="Logout" icon="fa-solid fa-right-to-bracket" action="#{homePageForm.logout}" styleClass="ui-button-danger ui-button-raised ui-button-flat" />
+		
+					<div class="box-menu-itens-direita">
+					
+						<div class="menu-itens-direita">
+							<p:commandButton icon="pi pi-home" value="Voltar" action="#{homePageForm.backHomePage}" update="messages" title="Menu principal"/>
+						</div>
+		
+						<div class="menu-itens-direita">
+							<p:commandButton id="logout" value="Logout" icon="fa-solid fa-right-to-bracket" action="#{homePageForm.logout}" styleClass="ui-button-danger ui-button-raised ui-button-flat" title="Sair do sistema"/>
+						</div>
 					</div>
 				</div>
-			</div>
+				
+			<!-- MENU DE AÇÕES COM OS RELATORIOS -->		
+				<p:toolbar id="toolbar">
+					<p:toolbarGroup>
+						
+						<ui:insert name="topbuttons"/>
+		
+					</p:toolbarGroup>
+				</p:toolbar>
+			</h:form>
 			
-		<!-- MENU DE AÇÕES COM OS RELATORIOS -->		
-			<p:toolbar id="toolbar">
-				<p:toolbarGroup>
-					
-					<ui:insert name="topbuttons"/>
-	
-				</p:toolbarGroup>
-			</p:toolbar>
-		</h:form>
-		
-		<ui:insert name="conteudo"/>
-		
-	</h:body>
-		
+			<ui:insert name="conteudo"/>
+			
+		</h:body>
 	</html>
