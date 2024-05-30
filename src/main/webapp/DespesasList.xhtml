@@ -15,15 +15,33 @@
 	</ui:define>
 	
 	<ui:define name="topbuttons">
-		<p:commandButton type="button" value="Novo registro" icon="pi pi-file" styleClass="ui-button-raised ui-button-info" onclick="PF('novoRegistro').show()"/>
+		
+		<div class="autocomplete-box">
+			<span class="ui-input-icon-right"> 
+			<i class="pi pi-search" />
+				<p:inputText placeholder="Pesquisar" value="#{despesasListReport.termoPesquisa}" size="30"/>
+			</span>
+			<p:commandButton value="Pesquisar" styleClass="ui-button-raised ui-button-info mr-2" actionListener="#{despesasListReport.pesquisar}" style="margin-left: 3px" update="formReport"/>
+		</div>
 	
-		<p:commandButton title="Editar" icon="fa fa-edit" styleClass="ui-button-raised ui-button-warning" update="formReport toolbar formLayout" process="@this" style="margin-left: 2px" disabled="#{not despesasListReport.despesaSelected}" actionListener="#{despesasListReport.despesaSelecionada()}" oncomplete="PF('novoRegistro').show()">
-			<p:resetInput target="formReport:modalParams"/>
+		<p:commandButton value="Parametros" icon="pi pi-file" styleClass="ui-button-raised ui-button-info" onclick="PF('parametros').show()" />
+
+		<p:commandButton value="Cadastrar" icon="fa-solid fa-plus" styleClass="ui-button-raised ui-button-info" onclick="PF('novoRegistro').show()" style="margin-left: 3px"/>
+		
+		<p:commandButton id="btnEditar" title="Editar" icon="fa fa-edit" styleClass="ui-button-raised ui-button-warning" update="formReport toolbar formLayout" process="@this" disabled="#{not despesasListReport.despesaSelected}" actionListener="#{despesasListReport.despesaSelecionada}" oncomplete="PF('novoRegistro').show()" style="margin-left: 3px">
+			<p:resetInput target="formReport:modalCadastro"/>
 		</p:commandButton>
 		
-		<p:commandButton title="Excluir" icon="fa fa-trash" styleClass="ui-button-raised ui-button-danger" update="formReport toolbar formLayout" process="@this" style="margin-left: 2px" disabled="#{not despesasListReport.despesaSelected}" actionListener="#{despesasListReport.deletarDespesa()}">
-			<p:resetInput target="formReport:modalParams"/>
-		</p:commandButton>		
+		<p:commandButton title="Excluir" icon="fa fa-trash" styleClass="ui-button-raised ui-button-danger" update="formReport toolbar formLayout" process="@this" disabled="#{not despesasListReport.despesaSelected}" actionListener="#{despesasListReport.deletarDespesa}" style="margin-left: 3px" />
+
+		<i class="pi pi-bars px-2" style="margin: 5px;"/>
+		
+		<p:commandButton type="button" value="Excel" icon="pi pi-file-excel" styleClass="ui-button-raised ui-button-info mr-2" title="Exportar em EXCEL"/>
+		
+		<p:commandButton type="button" value="CSV" icon="pi pi-file" styleClass="ui-button-raised ui-button-info mr-2" style="margin-left: 3px" title="Exportar em CSV" />
+		
+		<p:commandButton type="button" value="PDF" icon="pi pi-file-pdf" styleClass="ui-button-raised ui-button-info mr-2" style="margin-left: 3px" title="Exportar em PDF"/>		
+				
 	</ui:define>
 				
 	<ui:define name="conteudo">
@@ -34,6 +52,8 @@
 	
 			<h:form id="formReport">
 			
+				<p:spacer height="1" />
+			
 				<p:dataTable id="datatable" 
 							 value="#{despesasListReport.listarDespesas}" 
 							 var="despesa" 
@@ -43,29 +63,32 @@
 							 paginatorPosition="bottom" 
 							 rows="15" 
 							 selection="#{despesasListReport.despesa}" 
-							 rowKey="#{despesa.id}" 
-							 emptyMessage="Nenhum dado encontrado" >
+							 rowKey="#{despesa.id}">
 					
 					<p:ajax event="rowSelect" update="formLayout:toolbar"/>
 					<p:ajax event="rowUnselect" update="formLayout:toolbar"/>
 					
-					<p:column headerText="Nome">
+					<p:column headerText="Nome" sortBy="#{despesa.nome}">
 						<h:outputText value="#{despesa.nome}" />
 					</p:column>
 	
-					<p:column headerText="Valor">
+					<p:column headerText="Valor" sortBy="#{despesa.valor}">
 						<h:outputText value="#{despesa.valor}">
 							<f:convertNumber type="currency" currencySymbol="R$"/>
 						</h:outputText>
 					</p:column>
 	
-					<p:column headerText="Data">
-						<h:outputText value="#{despesa.data}">
+					<p:column headerText="Data do Gasto" sortBy="#{despesa.dataCusto}">
+						<h:outputText value="#{despesa.dataCusto}">
 							<f:convertDateTime pattern="dd/MM/yyyy"/>
 						</h:outputText>
 					</p:column>
-	
-					<p:column headerText="Quantidade">
+
+					<p:column headerText="Mes do Gasto" sortBy="#{despesa.mesGasto}">
+						<h:outputText value="#{despesa.mesGasto}" />
+					</p:column>
+						
+					<p:column headerText="Quantidade" sortBy="#{despesa.quantidade}">
 						<h:outputText value="#{despesa.quantidade}" />
 					</p:column>
 					
@@ -81,9 +104,26 @@
 						<span class="font-bold"> Registros: #{despesasListReport.total}</span>
 					</f:facet>
 			</p:dataTable>
+				
+				<!-- Modal Parametros -->
+				<p:dialog id="modalParametros" header="Parametros" widgetVar="parametros" modal="true" resizable="false" showEffect="fade" width="600" >
+				
+					<h:panelGrid id="modalParametrospanel" columns="2">
+						
+						<p:outputLabel value="Data Inicial: " for="inputInitDataPesquisa"/>
+						<p:calendar id="inputInitDataPesquisa" value="#{despesasListReport.dataInicial}" showOn="button" pattern="dd/MM/yyyy" />
 
-				<!-- Modal -->
-				<p:dialog id="modalParams" header="Detalhar Itens e Custos" widgetVar="novoRegistro" modal="true" resizable="false" showEffect="fade" width="660" >
+						<p:outputLabel value="Data Final: " for="inputFimDataPesquisa"/>
+						<p:calendar id="inputFimDataPesquisa" value="#{despesasListReport.dataFinal}" showOn="button" pattern="dd/MM/yyyy"/>
+						
+						<p:commandButton value="Pesquisar" styleClass="ui-button-raised ui-button-info mr-2" actionListener="#{despesasListReport.pesquisar}" style="margin-left: 3px" update="formReport"/>
+						<p:commandButton value="Limpar" styleClass="ui-button-raised ui-button-info mr-2" actionListener="#{despesasListReport.clearDados}" style="margin-left: 3px" update="modalParametrospanel" />
+					</h:panelGrid>
+					
+				</p:dialog>
+
+				<!-- Modal Cadastro -->
+				<p:dialog id="modalCadastro" header="Detalhar Itens e Custos" widgetVar="novoRegistro" modal="true" resizable="false" showEffect="fade" width="660" >
 					
 					<h:panelGrid columns="2">
 						<p:outputLabel value="Nome: " for="inputNome" />
@@ -111,8 +151,8 @@
 						<p:inputTextarea id="inputDesc1" cols="80" value="#{despesasListReport.descricao}"/>
 					</h:panelGrid>
 					
-					<p:commandButton value="Salvar" style="margin: 3px" actionListener="#{despesasListReport.salvar}" update="datatable formReport formLayout" />
-					<p:commandButton value="Cancelar" onclick="PF('novoRegistro').hide()" actionListener="#{despesasListReport.clearDados}" update="modalParams"/>
+					<p:commandButton value="Salvar" style="margin: 3px" actionListener="#{despesasListReport.salvar}" update="datatable formLayout" onclick="PF('novoRegistro').hide(); reload()"/>
+					<p:commandButton value="Cancelar" onclick="PF('novoRegistro').hide()" actionListener="#{despesasListReport.clearDados}" update="modalCadastro"/>
 
 				</p:dialog>
 		</h:form>
