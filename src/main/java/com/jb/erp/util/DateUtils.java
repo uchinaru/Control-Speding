@@ -22,7 +22,15 @@ public class DateUtils implements Serializable{
 	            return null;
 	        }
 	} 
-	
+
+	public String transformaDataSimplesString(Date date) {
+		try {
+			return sdfsimples.format(date);
+		} catch (Exception e) {
+			 return null;
+		}
+	}
+
 	public Date transformaDataSimples(Date date) {
 		String formattedDate = sdfsimples.format(date);
 		try {
