@@ -36,11 +36,11 @@
 
 		<i class="pi pi-bars px-2" style="margin: 5px;"/>
 		
-		<p:commandButton type="button" value="Excel" icon="pi pi-file-excel" styleClass="ui-button-raised ui-button-info mr-2" title="Exportar em EXCEL"/>
+		<p:commandButton value="Excel" icon="pi pi-file-excel" styleClass="ui-button-raised ui-button-info mr-2" title="Exportar em EXCEL" actionListener="#{despesasListReport.exportExcel}" update="formLayout"/>
 		
-		<p:commandButton type="button" value="CSV" icon="pi pi-file" styleClass="ui-button-raised ui-button-info mr-2" style="margin-left: 3px" title="Exportar em CSV" />
+		<p:commandButton value="CSV" icon="pi pi-file" styleClass="ui-button-raised ui-button-info mr-2" style="margin-left: 3px" title="Exportar em CSV" />
 		
-		<p:commandButton type="button" value="PDF" icon="pi pi-file-pdf" styleClass="ui-button-raised ui-button-info mr-2" style="margin-left: 3px" title="Exportar em PDF"/>		
+		<p:commandButton value="PDF" icon="pi pi-file-pdf" styleClass="ui-button-raised ui-button-info mr-2" style="margin-left: 3px" title="Exportar em PDF"/>		
 				
 	</ui:define>
 				
