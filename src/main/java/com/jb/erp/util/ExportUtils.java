@@ -55,5 +55,37 @@ public class ExportUtils implements Serializable {
 		return wb;
 	}
 
+	public Workbook exportCSVDespesa(String tituloArquivo, String[] tituloColunas, List<Despesa> listarDespesas) throws IOException {
+		
+		final Workbook wb = new HSSFWorkbook();
+		Sheet sheet = wb.createSheet(tituloArquivo);
+
+		Row row = sheet.createRow(0);
+		row.createCell(0).setCellValue(tituloArquivo + ": " + dateUtils.dateTimeStampFormat());
+		
+		Row row1 = sheet.createRow(2);
+		for (int i = 0; i < tituloColunas.length; i++) {
+			row1.createCell(i).setCellValue(tituloColunas[i].concat(";"));
+		}
+		
+        int rowIndex = 3;
+        for (Despesa despesa : listarDespesas) {
+            Row row2 = sheet.createRow(rowIndex++);
+
+            row2.createCell(0).setCellValue(despesa.getNome().concat(";"));
+            row2.createCell(1).setCellValue(String.valueOf(despesa.getValor()).concat(";"));
+            row2.createCell(2).setCellValue(dateUtils.transformaDataSimplesString(despesa.getDataCusto()).concat(";"));
+            row2.createCell(3).setCellValue(String.valueOf(despesa.getMesGasto()).concat(";"));
+            row2.createCell(4).setCellValue(String.valueOf(despesa.getQuantidade()).concat(";"));
+            row2.createCell(5).setCellValue(despesa.getTipoPagamentos().toString().concat(";"));
+            row2.createCell(6).setCellValue(despesa.getDescricao().concat(";"));
+        }
+
+		try (OutputStream fileOut = new FileOutputStream(tituloArquivo.concat(".csv"))) {
+			wb.write(fileOut);
+		}
+
+		return wb;
+	}
 
 }
