@@ -193,6 +193,22 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 		}
 
 	}
+
+	public Workbook exportCsv() throws IOException {
+		
+		if (listarDespesas != null) {
+			
+			String tituloArquivo = "Relatrio de despesas";
+			String[] tituloColunas = { "Nome", "Valor", "Data gasto", "Mes gasto", "Quantidade", "Forma de pagamento", "Descricao" };
+
+			return exportUtils.exportCSVDespesa(tituloArquivo, tituloColunas, listarDespesas);
+			
+		} else {
+			getMessagesUtils().warning("É necessário efetuar uma pesquisapesqui");
+			return null;
+		}
+
+	}
 	
 	public String getNome() {
 		return nome;
