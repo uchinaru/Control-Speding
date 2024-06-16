@@ -31,7 +31,7 @@ public class DateUtils implements Serializable{
 		}
 	}
 
-	public Date transformaDataSimples(Date date) {
+	public static Date transformaDataSimples(Date date) {
 		String formattedDate = sdfsimples.format(date);
 		try {
 			return sdfsimples.parse(formattedDate);
@@ -58,7 +58,7 @@ public class DateUtils implements Serializable{
 		}
 	}
 	
-	public int getMonth(Date date) {
+	public static int getMonth(Date date) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		
@@ -66,7 +66,7 @@ public class DateUtils implements Serializable{
 		
 	}
 	
-	public String getMes(Date date) {
+	public static String getMes(Date date) {
 		String result = "";
 		
 		String[] meses = {"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"};
