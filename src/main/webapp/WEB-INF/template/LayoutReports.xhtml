@@ -17,6 +17,10 @@
 
 		<h:body>
 		
+			<p:idleMonitor timeout="300000">
+				<p:ajax event="idle" listener="#{homePageForm.logoutIdle}" />
+			</p:idleMonitor>		
+			
 			<ui:insert name="initcode" />
 
 			<h:form id="formLayout">
