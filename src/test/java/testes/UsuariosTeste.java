@@ -18,7 +18,9 @@ import com.jb.erp.util.encryptUtils;
 class UsuariosTeste extends FormAbstract {
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	private User usuario = new User();
+	
 	EntityManager EntityManager() {
 		 EntityManagerFactory emf = Persistence.createEntityManagerFactory("ControlSpending");
 	        EntityManager em = emf.createEntityManager();
@@ -27,8 +29,7 @@ class UsuariosTeste extends FormAbstract {
 	
 	@Test
 	void cadastroUser() {
-		
-		User usuario = new User();
+	
 		usuario.setNome("usuario.teste");
 		usuario.setLogin("teste");
 		usuario.setSenha(encryptUtils.encryptPasswordMD5("teste"));
