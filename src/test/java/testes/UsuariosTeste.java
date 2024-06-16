@@ -15,7 +15,7 @@ import com.jb.erp.repository.TipoUsuario;
 import com.jb.erp.repository.UsersSearch;
 import com.jb.erp.util.encryptUtils;
 
-class CadastrosUsuarioTeste extends FormAbstract {
+class UsuariosTeste extends FormAbstract {
 	
 	private static final long serialVersionUID = 1L;
 
