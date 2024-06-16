@@ -12,11 +12,10 @@ public class DateUtils implements Serializable{
 	private static SimpleDateFormat sdfComHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	private static SimpleDateFormat sdfsimples = new SimpleDateFormat("dd/MM/yyyy");
 	
-	public Date dateTimeStampFormat() {
+	public String dateTimeStampFormat() {
 	       Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-	        String formattedDate = sdfComHora.format(timeStamp);
 	        try {
-	            return sdfComHora.parse(formattedDate);
+	            return sdfComHora.format(timeStamp);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            return null;
