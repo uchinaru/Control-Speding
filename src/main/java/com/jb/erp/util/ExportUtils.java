@@ -1,5 +1,6 @@
 package com.jb.erp.util;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,6 +14,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
 import com.jb.erp.model.Despesa;
 
 public class ExportUtils implements Serializable {
@@ -88,4 +98,66 @@ public class ExportUtils implements Serializable {
 		return wb;
 	}
 
+	 public void exportPDFDespesa(String tituloArquivo, String[] tituloColunas, List<Despesa> listarDespesas) throws FileNotFoundException, DocumentException {
+	        
+	        Document document = new Document(PageSize.A4.rotate());
+	        
+	        PdfWriter.getInstance(document, new FileOutputStream(tituloArquivo.concat(".pdf")));
+	        document.open();
+
+	        document.add(new Paragraph(tituloArquivo + ": " + dateUtils.dateTimeStampFormat()));
+	        document.add(new Paragraph(" "));
+	        
+	        PdfPTable table = new PdfPTable(tituloColunas.length);
+	        table.setWidthPercentage(100);
+
+	        for (String tituloColuna : tituloColunas) {
+	            PdfPCell cell = new PdfPCell(new Phrase(tituloColuna));
+	            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+	            cell.setBorder(Rectangle.NO_BORDER);
+	            table.addCell(cell);
+	        }
+	     
+	        for (Despesa despesa : listarDespesas) {
+	        	
+	            PdfPCell cellNome = new PdfPCell(new Phrase(despesa.getNome()));
+	            cellNome.setHorizontalAlignment(Element.ALIGN_CENTER);
+	            cellNome.setBorder(Rectangle.NO_BORDER);
+	            table.addCell(cellNome);
+
+	            PdfPCell cellValor = new PdfPCell(new Phrase(String.valueOf(despesa.getValor())));
+	            cellValor.setHorizontalAlignment(Element.ALIGN_CENTER);
+	            cellValor.setBorder(Rectangle.NO_BORDER);
+	            table.addCell(cellValor);
+
+	            PdfPCell cellData = new PdfPCell(new Phrase(dateUtils.transformaDataSimplesString(despesa.getDataCusto())));
+	            cellData.setHorizontalAlignment(Element.ALIGN_CENTER);
+	            cellData.setBorder(Rectangle.NO_BORDER);
+	            table.addCell(cellData);
+
+	            PdfPCell cellMes = new PdfPCell(new Phrase(String.valueOf(despesa.getMesGasto())));
+	            cellMes.setHorizontalAlignment(Element.ALIGN_CENTER);
+	            cellMes.setBorder(Rectangle.NO_BORDER);
+	            table.addCell(cellMes);
+
+	            PdfPCell cellQuantidade = new PdfPCell(new Phrase(String.valueOf(despesa.getQuantidade())));
+	            cellQuantidade.setHorizontalAlignment(Element.ALIGN_CENTER);
+	            cellQuantidade.setBorder(Rectangle.NO_BORDER);
+	            table.addCell(cellQuantidade);
+
+	            PdfPCell cellTipoPagamento = new PdfPCell(new Phrase(despesa.getTipoPagamentos().toString()));
+	            cellTipoPagamento.setHorizontalAlignment(Element.ALIGN_CENTER);
+	            cellTipoPagamento.setBorder(Rectangle.NO_BORDER);
+	            table.addCell(cellTipoPagamento);
+
+	            PdfPCell cellDescricao = new PdfPCell(new Phrase(despesa.getDescricao()));
+	            cellDescricao.setHorizontalAlignment(Element.ALIGN_CENTER);
+	            cellDescricao.setBorder(Rectangle.NO_BORDER);
+	            table.addCell(cellDescricao);
+	        }
+	        
+	        document.add(table);
+
+	        document.close();
+	    }
 }

@@ -12,6 +12,8 @@ import javax.inject.Named;
 
 import org.apache.poi.ss.usermodel.Workbook;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.jb.erp.model.Despesa;
 import com.jb.erp.repository.TipoPagamentos;
 import com.jb.erp.util.DateUtils;
@@ -45,6 +47,8 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 	private String termoPesquisa = "";
 	private Date dataInicial = null;
 	private Date dataFinal  = null;
+	private String tituloArquivo = "Relatrio de despesas";
+	private String[] tituloColunas = { "Nome", "Valor", "Data gasto", "Mes gasto", "Quantidade", "Forma de pagamento", "Descricao" };
 	
 	@PostConstruct
 	public void init() {
@@ -182,13 +186,10 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 		
 		if (listarDespesas != null) {
 			
-			String tituloArquivo = "Relatrio de despesas";
-			String[] tituloColunas = { "Nome", "Valor", "Data gasto", "Mes gasto", "Quantidade", "Forma de pagamento", "Descricao" };
-
 			return exportUtils.exportExcelDespesa(tituloArquivo, tituloColunas, listarDespesas);
 			
 		} else {
-			getMessagesUtils().warning("É necessário efetuar uma pesquisapesqui");
+			getMessagesUtils().warning("É necessário efetuar uma pesquisa");
 			return null;
 		}
 
@@ -198,14 +199,23 @@ public class DespesasListReport extends FormAbstract implements Serializable{
 		
 		if (listarDespesas != null) {
 			
-			String tituloArquivo = "Relatrio de despesas";
-			String[] tituloColunas = { "Nome", "Valor", "Data gasto", "Mes gasto", "Quantidade", "Forma de pagamento", "Descricao" };
-
 			return exportUtils.exportCSVDespesa(tituloArquivo, tituloColunas, listarDespesas);
 			
 		} else {
-			getMessagesUtils().warning("É necessário efetuar uma pesquisapesqui");
+			getMessagesUtils().warning("É necessário efetuar uma pesquisa");
 			return null;
+		}
+
+	}
+	
+	public void exportPDF() throws IOException, DocumentException {
+		
+		if (listarDespesas != null) {
+
+			exportUtils.exportPDFDespesa(tituloArquivo, tituloColunas, listarDespesas);
+
+		} else {
+			getMessagesUtils().warning("É necessário efetuar uma pesquisa");
 		}
 
 	}
