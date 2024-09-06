@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import com.jb.erp.model.User;
 
-@Named
+@Named(value = "loginForm")
 @ViewScoped
 public class LoginForm extends FormAbstract implements Serializable {
 	private static final long serialVersionUID = 1L;
