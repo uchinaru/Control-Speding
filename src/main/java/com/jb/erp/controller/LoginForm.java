@@ -2,6 +2,7 @@ package com.jb.erp.controller;
 
 import java.io.Serializable;
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.jb.erp.model.User;
 
 @Named(value = "loginForm")
-@ViewScoped
+@SessionScoped
 public class LoginForm extends FormAbstract implements Serializable {
 	private static final long serialVersionUID = 1L;
 

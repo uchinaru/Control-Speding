@@ -6,8 +6,6 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	template="WEB-INF/template/LayoutLogin.xhtml">
 	
-	<ui:param name="bean1" value="#{loginForm}" />
-	
 	<ui:define name="title-aba-navegador">
 		Painel - Control Speding
 	</ui:define>	
@@ -20,11 +18,11 @@
 				<h1>Login</h1>
 				<p>Digite os seus dados de acesso nos campos abaixo.</p>
 				<h:panelGrid columns="1" id="camposGrid">
-					<p:inputText id="loginInput" value="#{bean1.login}" placeholder="Digite o login"/>
-					<p:password id="senhaInput" value="#{bean1.senha}" placeholder="Digite a senha"/>
+					<p:inputText id="loginInput" value="#{loginForm.login}" placeholder="Digite o login"/>
+					<p:password id="senhaInput" value="#{loginForm.senha}" placeholder="Digite a senha"/>
 		
-					<p:commandButton value="Logar" class="btn" action="#{bean1.logar}" update="messages camposGrid" onclick="loadClick()"/>
-					<p:commandButton value="Cadastrar" class="btn" action="#{bean1.cadastrar}"/>
+					<p:commandButton value="Logar" class="btn" action="#{loginForm.logar}" update="messages camposGrid" onclick="loadClick()"/>
+					<p:commandButton value="Cadastrar" class="btn" action="#{loginForm.cadastrar}"/>
 					<p:progressBar id="progressBarIndeterminate" style="height:6px; display: none;" mode="indeterminate"/>
 					
 					<a href="/">recuperar senha</a>
